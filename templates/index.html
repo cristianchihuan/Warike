@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Warike - Auténtica Cocina Peruana</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/profile_picture/Profile_Picture.jpg') }}" alt="El Warike Logo" class="logo-img">
+                <h1>El Warike</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-toggle" id="navToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#order">Ordenar</a></li>
+                    {% if session.user_id %}
+                    <li><a href="#recent">Mis Pedidos</a></li>
+                    {% endif %}
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            {{ message }}
+                            <button class="flash-close">&times;</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section" id="hero">
+                <div class="hero-background">
+                    <img src="{{ url_for('static', filename='images/menu/ceviche_peruano.jpg') }}" alt="Ceviche Peruano" class="hero-bg-img">
+                </div>
+                <div class="hero-content">
+                    <h1>Auténtica Cocina Peruana</h1>
+                    <p>Comida Tradicional Peruana en el Norte de Virginia</p>
+                    <div class="hero-buttons">
+                        <a href="{{ url_for('menu') }}" class="btn-primary">Ver Menú Completo</a>
+                        <a href="{{ url_for('quick_order') }}" class="btn-primary">Ordenar Ahora</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Menu Preview Section -->
+            <section class="menu-preview" id="menu">
+                <h3>Nuestros Platos Destacados</h3>
+                <div class="featured-dishes">
+                    <div class="dish-card">
+                        <img src="{{ url_for('static', filename='images/menu/ceviche_peruano.jpg') }}" alt="Ceviche Peruano">
+                        <div class="dish-info">
+                            <h4>Ceviche Peruano</h4>
+                            <p>Pescado fresco marinado en limón con cebolla y cilantro</p>
+                            <span class="dish-price">$16.99</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <img src="{{ url_for('static', filename='images/menu/seco_de_pollo.jpg') }}" alt="Seco de Pollo">
+                        <div class="dish-info">
+                            <h4>Seco de Pollo</h4>
+                            <p>Pollo guisado en salsa de cilantro con arroz y frijoles</p>
+                            <span class="dish-price">$14.99</span>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <img src="{{ url_for('static', filename='images/menu/hamburguesa_warike.jpg') }}" alt="Hamburguesa Warike">
+                        <div class="dish-info">
+                            <h4>Hamburguesa Warike</h4>
+                            <p>Hamburguesa especial con sabores peruanos únicos</p>
+                            <span class="dish-price">$13.99</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Section -->
+            <section class="order-section" id="order">
+                <h2>Ordenar</h2>
+                <div class="order-options">
+                    <div class="order-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Menú Completo</h3>
+                        <p>Explora todos nuestros platos tradicionales peruanos</p>
+                        <a href="{{ url_for('menu') }}" class="btn-primary">Ver Menú</a>
+                    </div>
+                    <div class="order-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Pedido Rápido</h3>
+                        <p>Nuestros platos más populares para ordenar rápido</p>
+                        <a href="{{ url_for('quick_order') }}" class="btn-primary">Ordenar Ahora</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Order Section -->
+            {% if session.user_id and recent_orders %}
+            <section class="recent-section" id="recent">
+                <h2>Mis Pedidos Recientes</h2>
+                <div class="recent-order">
+                    {% for order in recent_orders %}
+                    <div class="order-item">
+                        <img src="{{ url_for('static', filename='images/menu/ceviche_peruano.jpg') }}" alt="Plato">
+                        <div class="order-details">
+                            <h4>{{ order.items[0].name if order.items else 'Pedido' }}</h4>
+                            <p>Estado: {{ order.status }}</p>
+                            <span class="price">${{ "%.2f"|format(order.total_amount) }}</span>
+                        </div>
+                        <form method="POST" action="{{ url_for('reorder', order_id=order.id) }}" style="display: inline;">
+                            <button type="submit" class="btn-reorder">Reordenar</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Sign In Section -->
+            <section class="signin-section" id="signin">
+                {% if session.user_id %}
+                <h2>Bienvenido, {{ session.username }}</h2>
+                <p>Email: {{ session.email }}</p>
+                <form method="POST" action="{{ url_for('logout') }}" style="display: inline;">
+                    <button type="submit" class="btn-primary">Cerrar Sesión</button>
+                </form>
+                {% else %}
+                <h2>Iniciar Sesión</h2>
+                <form class="signin-form" method="POST" action="{{ url_for('login') }}">
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Contraseña" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Iniciar Sesión</button>
+                </form>
+                <p style="text-align: center; margin-top: 1rem;">
+                    ¿No tienes cuenta? <a href="{{ url_for('signup') }}">Regístrate aquí</a>
+                </p>
+                {% endif %}
+            </section>
+
+            <!-- Download App Section -->
+            <section class="app-section">
+                <h2>Descargar App</h2>
+                <p>Escanea para descargar la app móvil de {{ restaurant.name }}</p>
+                <div class="qr-container">
+                    <div class="qr-code">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <p>Escanea el código QR para descargar<br>o ver en App Store / Google Play</p>
+                </div>
+            </section>
+
+            <!-- Opening Hours -->
+            <section class="hours-section">
+                <h2>Horarios de Apertura</h2>
+                <div class="hours-grid">
+                    <div class="hours-item">
+                        <span class="day">Lun-Jue:</span>
+                        <span class="time">{{ restaurant.hours.mon_thu }}</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Vie-Sáb:</span>
+                        <span class="time">{{ restaurant.hours.fri_sat }}</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Dom:</span>
+                        <span class="time">{{ restaurant.hours.sun }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section class="support-section" id="contact">
+                <h2>Contacto</h2>
+                <div class="support-info">
+                    <div class="support-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Llamanos: {{ restaurant.phone }}</span>
+                    </div>
+                    <div class="support-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email: {{ restaurant.email }}</span>
+                    </div>
+                    <div class="support-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ restaurant.address }}</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="{{ url_for('privacy') }}">Política de Privacidad</a>
+                <a href="{{ url_for('terms') }}">Términos de Servicio</a>
+            </div>
+            <p class="copyright">© Copyright 2025 {{ restaurant.name }} - Auténtica Cocina Peruana</p>
+        </footer>
+    </div>
+
+    <!-- Simple JavaScript for mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Flash message close buttons
+            document.querySelectorAll('.flash-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.remove();
+                });
+            });
+
+            // Auto-hide flash messages after 5 seconds
+            setTimeout(() => {
+                document.querySelectorAll('.flash-message').forEach(message => {
+                    message.remove();
+                });
+            }, 5000);
+        });
+    </script>
+</body>
+</html> 

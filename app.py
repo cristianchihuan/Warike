@@ -31,9 +31,9 @@ config = {
 # Restaurant configuration - Updated to match Peruvian Warike branding
 RESTAURANT_INFO = {
     'name': 'Peruvian Warike',
-    'phone': '(434) 845 - 0070',
-    'email': 'info@peruvianwarike.com',
-    'address': '1213 Greenview Dr, Lynchburg, VA 24502',
+    'phone': '(571) 436-6183',
+    'email': 'warike92@gmail.com',
+    'address': '428 enterprise St , Sterling, VA, United States, 20164',
     'hours': {
         'mon_thu': '11:00 AM - 9:00 PM',
         'fri_sat': '11:00 AM - 9:30 PM',

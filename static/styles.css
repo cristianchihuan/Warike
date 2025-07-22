@@ -20,13 +20,72 @@ body {
 
 /* Header Styles - Light Blue Theme */
 .header {
-    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-    color: white;
-    padding: 1rem;
+    /* background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); */
+    background: none;
+    color: black;
+    padding: 0;
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(74, 144, 226, 0.2);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    padding: 1.5rem 1rem;
+    /* border-radius: 8px; */
+    /* margin-bottom: 1rem; */
+}
+
+.header-top.banner-bg {
+    background-image: url('images/banner/banner.jpg');
+    background-repeat: no-repeat;
+    min-height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.header-top.banner-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.65); /* white overlay for lower contrast */
+    z-index: 1;
+    border-radius: inherit;
+}
+
+.header-top > * {
+    position: relative;
+    z-index: 2;
+}
+
+.logo h1,
+.nav-menu a,
+.nav-toggle,
+.social-links a {
+    color: black !important;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.social-links a {
+    color: black;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.social-links a:hover {
+    opacity: 0.8;
 }
 
 .logo {
@@ -50,6 +109,7 @@ body {
     font-weight: 700;
     text-align: center;
     margin-bottom: 0;
+    color: black;
 }
 
 .nav {
@@ -624,6 +684,79 @@ section h2 {
     font-size: 1.1rem;
 }
 
+/* Hero Banner Section */
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+.hero-banner-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('images/banner/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5) grayscale(0.1);
+    z-index: 1;
+}
+.hero-banner-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+.hero-logo-title {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.hero-logo-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    background: #fff;
+}
+.hero-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+.hero-address {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0.2rem 0 0 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+.hero-social-links {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+.hero-social-links a {
+    color: #fff;
+    font-size: 2rem;
+    transition: opacity 0.3s;
+}
+.hero-social-links a:hover {
+    opacity: 0.7;
+}
+
+/* Remove old header-top/banner-bg styles for now */
+.header-top, .header-top.banner-bg, .header-top.banner-bg::before { display: none !important; }
+
 /* Responsive Design */
 @media (min-width: 768px) {
     .header {
@@ -723,6 +856,42 @@ section h2 {
     .hero-section h1 {
         font-size: 3.5rem;
     }
+}
+
+@media (max-width: 767px) {
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .nav-toggle {
+    align-self: center;
+    margin-bottom: 1rem;
+    order: 0;
+    z-index: 2;
+  }
+  .nav-menu {
+    width: 100%;
+    margin-top: 0;
+    border-radius: 0 0 8px 8px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    order: 1;
+    position: static;
+    text-align: center;
+  }
+  .nav-menu li {
+    text-align: center;
+  }
+  .nav-menu a {
+    color: black !important;
+    padding: 1rem 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #eee;
+  }
+  .nav-menu a:last-child {
+    border-bottom: none;
+  }
 }
 
 /* Animations */

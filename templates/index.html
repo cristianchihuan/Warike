@@ -10,12 +10,25 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">
-                <img src="{{ url_for('static', filename='images/profile_picture/Profile_Picture.jpg') }}" alt="El Warike Logo" class="logo-img">
-                <h1>El Warike</h1>
+        <!-- Hero Banner Section -->
+        <section class="hero-banner">
+            <div class="hero-banner-bg"></div>
+            <div class="hero-banner-content">
+                <div class="hero-logo-title">
+                    <img src="{{ url_for('static', filename='images/profile_picture/Profile_Picture.jpg') }}" alt="El Warike Logo" class="hero-logo-img">
+                    <div>
+                        <h1 class="hero-title">El Warike</h1>
+                        <p class="hero-address">428 enterprise St, Sterling, VA, United States, 20164</p>
+                    </div>
+                </div>
+                <div class="hero-social-links">
+                    <a href="https://www.facebook.com/peruvianwarike" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-square"></i></a>
+                    <a href="https://www.instagram.com/elwarike92/" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
+        </section>
+        <!-- Header (for nav only) -->
+        <header class="header">
             <nav class="nav">
                 <button class="nav-toggle" id="navToggle">
                     <i class="fas fa-bars"></i>

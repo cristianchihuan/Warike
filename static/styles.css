@@ -21,7 +21,7 @@ body {
 /* Header Styles - Light Blue Theme */
 .header {
     /* background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); */
-    background: none;
+    background: #E3F2FD;
     color: black;
     padding: 0;
     position: sticky;
@@ -713,7 +713,7 @@ section h2 {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 2rem 2rem 1.5rem 2rem;
+    padding: 2rem 4rem 1.5rem 4rem;
 }
 .hero-logo-title {
     display: flex;
@@ -914,4 +914,20 @@ section {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+} 
+
+/* Mobile responsive styles for hero banner */
+@media (max-width: 768px) {
+    .hero-banner-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem 2rem 1rem 2rem;
+    }
+    .hero-logo-title {
+        margin-bottom: 1rem;
+    }
+    .hero-social-links {
+        justify-content: center;
+    }
 } 

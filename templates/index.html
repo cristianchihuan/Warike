@@ -17,7 +17,7 @@
                 <img src="{{ url_for('static', filename='images/profile_picture/Profile_Picture.jpg') }}" alt="El Warike Logo" class="hero-logo-img">
                 <div>
                     <h1 class="hero-title">El Warike</h1>
-                    <p class="hero-address">428 enterprise St, Sterling, VA, United States, 20164</p>
+                    <p class="hero-address">9876 Liberia Ave, Manassas, VA 20110</p>
                 </div>
             </div>
             <div class="hero-social-links">
@@ -36,7 +36,6 @@
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#hero">Inicio</a></li>
                     <li><a href="#menu">Menú</a></li>
-                    <li><a href="#order">Ordenar</a></li>
                     {% if session.user_id %}
                     <li><a href="#recent">Mis Pedidos</a></li>
                     {% endif %}
@@ -61,21 +60,6 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Hero Section -->
-            <section class="hero-section" id="hero">
-                <div class="hero-background">
-                    <img src="{{ url_for('static', filename='images/menu/ceviche_peruano.jpg') }}" alt="Ceviche Peruano" class="hero-bg-img">
-                </div>
-                <div class="hero-content">
-                    <h1>Auténtica Cocina Peruana</h1>
-                    <p>Comida Tradicional Peruana en el Norte de Virginia</p>
-                    <div class="hero-buttons">
-                        <a href="{{ url_for('menu') }}" class="btn-primary">Ver Menú Completo</a>
-                        <a href="{{ url_for('quick_order') }}" class="btn-primary">Ordenar Ahora</a>
-                    </div>
-                </div>
-            </section>
-
             <!-- Menu Preview Section -->
             <section class="menu-preview" id="menu">
                 <h3>Nuestros Platos Destacados</h3>
@@ -107,25 +91,6 @@
                 </div>
             </section>
 
-            <!-- Order Section -->
-            <section class="order-section" id="order">
-                <h2>Ordenar</h2>
-                <div class="order-options">
-                    <div class="order-card">
-                        <i class="fas fa-utensils"></i>
-                        <h3>Menú Completo</h3>
-                        <p>Explora todos nuestros platos tradicionales peruanos</p>
-                        <a href="{{ url_for('menu') }}" class="btn-primary">Ver Menú</a>
-                    </div>
-                    <div class="order-card">
-                        <i class="fas fa-clock"></i>
-                        <h3>Pedido Rápido</h3>
-                        <p>Nuestros platos más populares para ordenar rápido</p>
-                        <a href="{{ url_for('quick_order') }}" class="btn-primary">Ordenar Ahora</a>
-                    </div>
-                </div>
-            </section>
-
             <!-- Recent Order Section -->
             {% if session.user_id and recent_orders %}
             <section class="recent-section" id="recent">
@@ -148,58 +113,13 @@
             </section>
             {% endif %}
 
-            <!-- Sign In Section -->
-            <section class="signin-section" id="signin">
-                {% if session.user_id %}
-                <h2>Bienvenido, {{ session.username }}</h2>
-                <p>Email: {{ session.email }}</p>
-                <form method="POST" action="{{ url_for('logout') }}" style="display: inline;">
-                    <button type="submit" class="btn-primary">Cerrar Sesión</button>
-                </form>
-                {% else %}
-                <h2>Iniciar Sesión</h2>
-                <form class="signin-form" method="POST" action="{{ url_for('login') }}">
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Correo electrónico" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" placeholder="Contraseña" required>
-                    </div>
-                    <button type="submit" class="btn-primary">Iniciar Sesión</button>
-                </form>
-                <p style="text-align: center; margin-top: 1rem;">
-                    ¿No tienes cuenta? <a href="{{ url_for('signup') }}">Regístrate aquí</a>
-                </p>
-                {% endif %}
-            </section>
-
-            <!-- Download App Section -->
-            <section class="app-section">
-                <h2>Descargar App</h2>
-                <p>Escanea para descargar la app móvil de {{ restaurant.name }}</p>
-                <div class="qr-container">
-                    <div class="qr-code">
-                        <i class="fas fa-qrcode"></i>
-                    </div>
-                    <p>Escanea el código QR para descargar<br>o ver en App Store / Google Play</p>
-                </div>
-            </section>
-
             <!-- Opening Hours -->
             <section class="hours-section">
                 <h2>Horarios de Apertura</h2>
                 <div class="hours-grid">
                     <div class="hours-item">
-                        <span class="day">Lun-Jue:</span>
-                        <span class="time">{{ restaurant.hours.mon_thu }}</span>
-                    </div>
-                    <div class="hours-item">
-                        <span class="day">Vie-Sáb:</span>
-                        <span class="time">{{ restaurant.hours.fri_sat }}</span>
-                    </div>
-                    <div class="hours-item">
-                        <span class="day">Dom:</span>
-                        <span class="time">{{ restaurant.hours.sun }}</span>
+                        <span class="day">Lun-Dom:</span>
+                        <span class="time">{{ restaurant.hours.mon_sun }}</span>
                     </div>
                 </div>
             </section>

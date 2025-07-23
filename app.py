@@ -33,11 +33,9 @@ RESTAURANT_INFO = {
     'name': 'Peruvian Warike',
     'phone': '(571) 436-6183',
     'email': 'warike92@gmail.com',
-    'address': '428 enterprise St , Sterling, VA, United States, 20164',
+    'address': '9876 Liberia Ave, Manassas, VA 20110',
     'hours': {
-        'mon_thu': '11:00 AM - 9:00 PM',
-        'fri_sat': '11:00 AM - 9:30 PM',
-        'sun': '11:00 AM - 8:00 PM'
+        'mon_sun': '11:00 AM - 10:00 PM'
     }
 }
 

@@ -17,12 +17,22 @@
                 <img src="{{ url_for('static', filename='images/profile_picture/Profile_Picture.jpg') }}" alt="El Warike Logo" class="hero-logo-img">
                 <div>
                     <h1 class="hero-title">El Warike</h1>
-                    <p class="hero-address">9876 Liberia Ave, Manassas, VA 20110</p>
+                    <div class="hero-locations">
+                        <div class="location-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>9876 Liberia Ave, Manassas, VA 20110</span>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>428 Enterprise St, Sterling, VA 20164</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="hero-social-links">
                 <a href="https://www.facebook.com/peruvianwarike" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-square"></i></a>
                 <a href="https://www.instagram.com/elwarike92/" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@el.warike" target="_blank" rel="noopener" title="TikTok"><i class="fab fa-tiktok"></i></a>
             </div>
         </div>
     </section>
@@ -62,31 +72,116 @@
         <main class="main-content">
             <!-- Menu Preview Section -->
             <section class="menu-preview" id="menu">
-                <h3>Nuestros Platos Destacados</h3>
-                <div class="featured-dishes">
-                    <div class="dish-card">
-                        <img src="{{ url_for('static', filename='images/menu/ceviche_peruano.jpg') }}" alt="Ceviche Peruano">
-                        <div class="dish-info">
-                            <h4>Ceviche Peruano</h4>
-                            <p>Pescado fresco marinado en limón con cebolla y cilantro</p>
-                            <span class="dish-price">$16.99</span>
-                        </div>
+                <h3>Nuestro Menú</h3>
+                
+                <!-- Location Selector -->
+                <div class="location-selector">
+                    <h4>Selecciona tu ubicación:</h4>
+                    <div class="tab-bar">
+                        <button class="tab-button active" data-location="manassas">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Manassas</span>
+                        </button>
+                        <button class="tab-button" data-location="sterling">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Sterling</span>
+                        </button>
                     </div>
-                    <div class="dish-card">
-                        <img src="{{ url_for('static', filename='images/menu/seco_de_pollo.jpg') }}" alt="Seco de Pollo">
-                        <div class="dish-info">
-                            <h4>Seco de Pollo</h4>
-                            <p>Pollo guisado en salsa de cilantro con arroz y frijoles</p>
-                            <span class="dish-price">$14.99</span>
-                        </div>
+                </div>
+                
+                <!-- Manassas Menu -->
+                <div class="menu-pages" id="manassas-menu">
+                    <!-- Page 1 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0001.jpg') }}" alt="Menú El Warike - Página 1" class="menu-image">
                     </div>
-                    <div class="dish-card">
-                        <img src="{{ url_for('static', filename='images/menu/hamburguesa_warike.jpg') }}" alt="Hamburguesa Warike">
-                        <div class="dish-info">
-                            <h4>Hamburguesa Warike</h4>
-                            <p>Hamburguesa especial con sabores peruanos únicos</p>
-                            <span class="dish-price">$13.99</span>
-                        </div>
+                    
+                    <!-- Page 2 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0002.jpg') }}" alt="Menú El Warike - Página 2" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 3 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0003.jpg') }}" alt="Menú El Warike - Página 3" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 4 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0004.jpg') }}" alt="Menú El Warike - Página 4" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 5 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0005.jpg') }}" alt="Menú El Warike - Página 5" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 6 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0006.jpg') }}" alt="Menú El Warike - Página 6" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 7 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0007.jpg') }}" alt="Menú El Warike - Página 7" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 8 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0008.jpg') }}" alt="Menú El Warike - Página 8" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 9 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0009.jpg') }}" alt="Menú El Warike - Página 9" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 10 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0010.jpg') }}" alt="Menú El Warike - Página 10" class="menu-image">
+                    </div>
+                    
+                    <!-- Page 11 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/CARTA warike.pdf_pages-to-jpg-0011.jpg') }}" alt="Menú El Warike - Página 11" class="menu-image">
+                    </div>
+                </div>
+                
+                <!-- Sterling Menu -->
+                <div class="menu-pages" id="sterling-menu" style="display: none;">
+                    <!-- Sterling Page 1 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/Warike_Sterling_page-0001.jpg') }}" alt="Menú El Warike Sterling - Página 1" class="menu-image">
+                    </div>
+                    
+                    <!-- Sterling Page 2 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/Warike_Sterling_page-0002.jpg') }}" alt="Menú El Warike Sterling - Página 2" class="menu-image">
+                    </div>
+                    
+                    <!-- Sterling Page 3 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/Warike_Sterling_page-0003.jpg') }}" alt="Menú El Warike Sterling - Página 3" class="menu-image">
+                    </div>
+                    
+                    <!-- Sterling Page 4 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/Warike_Sterling_page-0004.jpg') }}" alt="Menú El Warike Sterling - Página 4" class="menu-image">
+                    </div>
+                    
+                    <!-- Sterling Page 5 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/Warike_Sterling_page-0005.jpg') }}" alt="Menú El Warike Sterling - Página 5" class="menu-image">
+                    </div>
+                    
+                    <!-- Sterling Page 6 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/Warike_Sterling_page-0006.jpg') }}" alt="Menú El Warike Sterling - Página 6" class="menu-image">
+                    </div>
+                    
+                    <!-- Sterling Page 7 -->
+                    <div class="menu-page">
+                        <img src="{{ url_for('static', filename='images/menu/Warike_Sterling_page-0007.jpg') }}" alt="Menú El Warike Sterling - Página 7" class="menu-image">
                     </div>
                 </div>
             </section>
@@ -129,16 +224,44 @@
                 <h2>Contacto</h2>
                 <div class="support-info">
                     <div class="support-item">
-                        <i class="fas fa-phone"></i>
-                        <span>Llamanos: {{ restaurant.phone }}</span>
-                    </div>
-                    <div class="support-item">
                         <i class="fas fa-envelope"></i>
                         <span>Email: {{ restaurant.email }}</span>
                     </div>
-                    <div class="support-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ restaurant.address }}</span>
+                </div>
+                
+                <!-- Phone Numbers Section -->
+                <div class="phone-numbers">
+                    <h3>Llamanos</h3>
+                    <div class="phone-grid">
+                        <div class="phone-location">
+                            <div class="phone-header">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h4>Manassas</h4>
+                            </div>
+                            <div class="phone-numbers-list">
+                                <a href="tel:703-789-2730" class="phone-link">
+                                    <i class="fas fa-phone"></i>
+                                    <span>703-789-2730</span>
+                                </a>
+                                <a href="tel:571-715-7093" class="phone-link">
+                                    <i class="fas fa-phone"></i>
+                                    <span>571-715-7093</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="phone-location">
+                            <div class="phone-header">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h4>Sterling</h4>
+                            </div>
+                            <div class="phone-numbers-list">
+                                <a href="tel:{{ restaurant.phone }}" class="phone-link">
+                                    <i class="fas fa-phone"></i>
+                                    <span>{{ restaurant.phone }}</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -154,7 +277,7 @@
         </footer>
     </div>
 
-    <!-- Simple JavaScript for mobile menu toggle -->
+    <!-- Simple JavaScript for mobile menu toggle and location selector -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile menu toggle
@@ -180,6 +303,31 @@
                     message.remove();
                 });
             }, 5000);
+
+            // Location selector functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const manassasMenu = document.getElementById('manassas-menu');
+            const sterlingMenu = document.getElementById('sterling-menu');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show/hide menus based on selection
+                    const location = this.getAttribute('data-location');
+                    if (location === 'manassas') {
+                        manassasMenu.style.display = 'flex';
+                        sterlingMenu.style.display = 'none';
+                    } else if (location === 'sterling') {
+                        manassasMenu.style.display = 'none';
+                        sterlingMenu.style.display = 'flex';
+                    }
+                });
+            });
         });
     </script>
 </body>

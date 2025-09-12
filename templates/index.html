@@ -46,6 +46,7 @@
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#hero">Inicio</a></li>
                     <li><a href="#menu">Menú</a></li>
+                    <li><a href="#videos">Videos</a></li>
                     {% if session.user_id %}
                     <li><a href="#recent">Mis Pedidos</a></li>
                     {% endif %}
@@ -70,6 +71,71 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Video Showcase Section -->
+            <section class="video-showcase" id="videos">
+                <h2>¡Vive la Experiencia Warike!</h2>
+                <p class="video-intro">Descubre la pasión y tradición detrás de cada plato en nuestros videos</p>
+                
+                <div class="video-gallery">
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video 
+                                class="showcase-video" 
+                                controls 
+                                preload="metadata"
+                                poster="{{ url_for('static', filename='images/menu/ceviche_peruano.jpg') }}"
+                                data-video="video1">
+                                <source src="{{ url_for('static', filename='images/videos/video1.mp4') }}" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                            <div class="video-overlay">
+                                <button class="play-button" data-video="video1">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="video-info">
+                                    <h4>Nuestra Cocina</h4>
+                                    <p>Conoce el arte culinario peruano</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-item">
+                        <div class="video-container">
+                            <video 
+                                class="showcase-video" 
+                                controls 
+                                preload="metadata"
+                                poster="{{ url_for('static', filename='images/menu/pescado_a_lo_macho.jpg') }}"
+                                data-video="video2">
+                                <source src="{{ url_for('static', filename='images/videos/video2.mp4') }}" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                            <div class="video-overlay">
+                                <button class="play-button" data-video="video2">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="video-info">
+                                    <h4>Sabores Auténticos</h4>
+                                    <p>La tradición peruana en cada bocado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-controls">
+                    <button class="control-btn" id="playAll">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Reproducir Todos</span>
+                    </button>
+                    <button class="control-btn" id="pauseAll">
+                        <i class="fas fa-pause-circle"></i>
+                        <span>Pausar Todos</span>
+                    </button>
+                </div>
+            </section>
+
             <!-- Menu Preview Section -->
             <section class="menu-preview" id="menu">
                 <h3>Nuestro Menú</h3>
@@ -327,6 +393,119 @@
                         sterlingMenu.style.display = 'flex';
                     }
                 });
+            });
+
+            // Video functionality
+            const playButtons = document.querySelectorAll('.play-button');
+            const videos = document.querySelectorAll('.showcase-video');
+            const videoItems = document.querySelectorAll('.video-item');
+            const playAllBtn = document.getElementById('playAll');
+            const pauseAllBtn = document.getElementById('pauseAll');
+
+            // Individual video play functionality
+            playButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-video');
+                    const video = document.querySelector(`video[data-video="${videoId}"]`);
+                    const videoItem = this.closest('.video-item');
+                    
+                    if (video && videoItem) {
+                        // Pause all other videos
+                        videos.forEach(v => {
+                            if (v !== video) {
+                                v.pause();
+                                v.closest('.video-item').classList.remove('playing');
+                            }
+                        });
+                        
+                        // Play selected video
+                        video.play();
+                        videoItem.classList.add('playing');
+                        
+                        // Hide overlay after a short delay
+                        setTimeout(() => {
+                            const overlay = videoItem.querySelector('.video-overlay');
+                            if (overlay) {
+                                overlay.style.opacity = '0';
+                                overlay.style.pointerEvents = 'none';
+                            }
+                        }, 300);
+                    }
+                });
+            });
+
+            // Video event listeners
+            videos.forEach(video => {
+                video.addEventListener('play', function() {
+                    const videoItem = this.closest('.video-item');
+                    if (videoItem) {
+                        videoItem.classList.add('playing');
+                    }
+                });
+
+                video.addEventListener('pause', function() {
+                    const videoItem = this.closest('.video-item');
+                    if (videoItem) {
+                        videoItem.classList.remove('playing');
+                        const overlay = videoItem.querySelector('.video-overlay');
+                        if (overlay) {
+                            overlay.style.opacity = '1';
+                            overlay.style.pointerEvents = 'auto';
+                        }
+                    }
+                });
+
+                video.addEventListener('ended', function() {
+                    const videoItem = this.closest('.video-item');
+                    if (videoItem) {
+                        videoItem.classList.remove('playing');
+                        const overlay = videoItem.querySelector('.video-overlay');
+                        if (overlay) {
+                            overlay.style.opacity = '1';
+                            overlay.style.pointerEvents = 'auto';
+                        }
+                    }
+                });
+            });
+
+            // Play all videos
+            if (playAllBtn) {
+                playAllBtn.addEventListener('click', function() {
+                    videos.forEach(video => {
+                        video.play();
+                    });
+                });
+            }
+
+            // Pause all videos
+            if (pauseAllBtn) {
+                pauseAllBtn.addEventListener('click', function() {
+                    videos.forEach(video => {
+                        video.pause();
+                    });
+                });
+            }
+
+            // Intersection Observer for video autoplay on scroll
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        // Optional: Add subtle animation when video comes into view
+                        video.style.opacity = '1';
+                        video.style.transform = 'scale(1)';
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            // Observe all videos
+            videos.forEach(video => {
+                video.style.opacity = '0.8';
+                video.style.transform = 'scale(0.98)';
+                video.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                videoObserver.observe(video);
             });
         });
     </script>

@@ -83,7 +83,6 @@
                                 class="showcase-video" 
                                 controls 
                                 preload="metadata"
-                                poster="{{ url_for('static', filename='images/menu/ceviche_peruano.jpg') }}"
                                 data-video="video1">
                                 <source src="{{ url_for('static', filename='images/videos/video1.mp4') }}" type="video/mp4">
                                 Tu navegador no soporta el elemento de video.
@@ -92,10 +91,6 @@
                                 <button class="play-button" data-video="video1">
                                     <i class="fas fa-play"></i>
                                 </button>
-                                <div class="video-info">
-                                    <h4>Nuestra Cocina</h4>
-                                    <p>Conoce el arte culinario peruano</p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,7 +101,6 @@
                                 class="showcase-video" 
                                 controls 
                                 preload="metadata"
-                                poster="{{ url_for('static', filename='images/menu/pescado_a_lo_macho.jpg') }}"
                                 data-video="video2">
                                 <source src="{{ url_for('static', filename='images/videos/video2.mp4') }}" type="video/mp4">
                                 Tu navegador no soporta el elemento de video.
@@ -115,24 +109,9 @@
                                 <button class="play-button" data-video="video2">
                                     <i class="fas fa-play"></i>
                                 </button>
-                                <div class="video-info">
-                                    <h4>Sabores Auténticos</h4>
-                                    <p>La tradición peruana en cada bocado</p>
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="video-controls">
-                    <button class="control-btn" id="playAll">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Reproducir Todos</span>
-                    </button>
-                    <button class="control-btn" id="pauseAll">
-                        <i class="fas fa-pause-circle"></i>
-                        <span>Pausar Todos</span>
-                    </button>
                 </div>
             </section>
 
